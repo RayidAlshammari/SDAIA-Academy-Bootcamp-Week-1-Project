@@ -12,15 +12,17 @@ This tool analyzes CSV files and generates detailed statistical reports includin
 ## Project Structure
 
 ```
-csv-profiler/
+bootcamp/
+├── app.py                    # Streamlit web interface (simple & inline)
 ├── src/csv_profiler/
-│   ├── io.py          # CSV file reading
-│   ├── profiling.py   # Core logic (6 functions)
-│   ├── render.py      # Output formatting
-│   └── cli.py         # CLI interface
-├── app.py             # Streamlit GUI
-├── data/              # Sample CSV files
-└── outputs/           # Generated reports
+│   ├── io.py                 # CSV file reading
+│   ├── profiling.py          # Core analysis (6 functions)
+│   ├── render.py             # Report formatting
+│   └── cli.py                # CLI interface
+├── data/                     # Sample CSV files
+├── outputs/                  # Generated reports
+├── requirements.txt          # Dependencies
+└── pyproject.toml           # Package config
 ```
 
 ## Data Flow
@@ -57,43 +59,52 @@ The project contains 6 core functions in `profiling.py`:
 
 ## Installation
 
-**One-time setup** - Install the package in development mode:
+Install required dependencies:
 
 ```bash
-cd csv-profiler
-pip install -e .
+pip install -r requirements.txt
 ```
 
-This makes the `csv-profiler` command available anywhere on your system!
+For development install (makes `csv-profiler` command available):
+
+```bash
+pip install -e .
+```
 
 ## Usage
 
 ### CLI Commands
 
+**Simple and easy:**
 ```bash
-# Basic usage - Simple!
+# Basic analysis (run from bootcamp directory)
 csv-profiler profile data/saudi_shopping_with_missing.csv
 
-# With verbose output (shows summary table)
-csv-profiler profile data/saudi_shopping_with_missing.csv --verbose
+# Show results in terminal
+csv-profiler profile data/saudi_shopping_with_missing.csv --show
 
-# Custom output directory and report name
-csv-profiler profile data/saudi_shopping_with_missing.csv \
-  --out-dir my_reports \
-  --report-name analysis
+# Custom output and name
+csv-profiler profile data/saudi_shopping_with_missing.csv -o my_reports -n analysis
+
+# Using absolute path (analyze any file on your computer)
+csv-profiler profile /Users/yourname/Documents/mydata.csv
+
+# Show version
+csv-profiler version
 ```
 
-**CLI Options:**
-- `csv_file` - Path to CSV file (required)
-- `--out-dir` / `-o` - Output directory (default: outputs)
-- `--report-name` / `-n` - Report name (default: report)
-- `--verbose` / `-v` - Display detailed summary table
-- `--help` - Show help message
+**💡 Tip:** You can use either relative paths (when in project directory) or absolute paths (from anywhere on your computer)!
 
-### GUI (Streamlit)
+**Quick reference:**
+- `csv_file` - Path to CSV file (absolute or relative)
+- `-o, --output` - Output directory (default: outputs)
+- `-n, --name` - Report name (default: report)
+- `-s, --show` - Display results in terminal
+- `--help` - Show help
+
+### Web Interface (Streamlit)
 
 ```bash
-cd csv-profiler
 streamlit run app.py
 ```
 
