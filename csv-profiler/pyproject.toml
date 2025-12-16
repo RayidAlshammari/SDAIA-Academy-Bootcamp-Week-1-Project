@@ -1,0 +1,40 @@
+[project]
+name = "csv-profiler"
+version = "1.0.0"
+description = "A comprehensive CSV data profiling tool with CLI and GUI interfaces"
+authors = [
+    {name = "SDAIA Academy Student"}
+]
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "typer>=0.12.3",
+    "rich>=13.7.0",
+    "streamlit>=1.35.0",
+]
+
+[project.scripts]
+csv-profiler = "csv_profiler.cli:main"
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.4.0",
+    "black>=23.0.0",
+    "ruff>=0.1.0",
+]
+
+[build-system]
+requires = ["setuptools>=68.0"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools]
+packages = ["csv_profiler"]
+package-dir = {"" = "src"}
+
+[tool.black]
+line-length = 88
+target-version = ['py311']
+
+[tool.ruff]
+line-length = 88
+target-version = "py311"
